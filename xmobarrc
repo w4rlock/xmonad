@@ -1,0 +1,22 @@
+Config { font = "xft:Terminus-8"
+       , bgColor = "#000000"
+       , fgColor = "#ececec"
+       , position = Top
+       , lowerOnStart = True 
+       , commands = [ Run Network "wlan0" ["-L","0","-H","32","--normal","#429942","--high","#A36666"] 10,
+                      -- Run Com "iwgetid" ["-r"] "essid" 50,
+                      Run Com "ifconfig" ["wlan0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}'"] "ipaddr" 50,
+                      Run Com "w4rlockInfo.sh" [" -b"] "bat" 50,
+                      Run Com "mpc" [" current -f %artist%"] "mpdArtist" 05,
+                      Run Cpu ["-L","3","-H","50","--normal","#429942","--high","#A36666"] 10,
+                      Run Memory ["-t","MEM: <usedratio>%"] 10,
+                      Run Date "%a   %b %_d, %Y  -  %I:%M:%S" "date" 10,
+                      Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       -- con internet
+       --, template = " %StdinReader% }{<fc=#0b8bff>[</fc>%cpu%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>%memory%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>%wlan0%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>BAT: %bat%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>IP: %ipaddr%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>MPD: %mpdArtist%<fc=#0b8bff>]</fc> -- <fc=#0b8bff>[</fc>%date%<fc=#0b8bff>]</fc> "
+       -- sin internet
+       , template = " %StdinReader% }{<fc=#0b8bff>[</fc>%cpu%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>%memory%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>BAT: %bat%<fc=#0b8bff>]</fc> <fc=#0b8bff>[</fc>MPD: %mpdArtist%<fc=#0b8bff>]</fc> -- <fc=#0b8bff>[</fc>%date%<fc=#0b8bff>]</fc> "
+       }
